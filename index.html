@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rutas del Eje · Turismo en el Eje Cafetero</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Nuestro CSS va DESPUÉS de Bootstrap para poder sobrescribirlo -->
+  <link href="css/estilos.css" rel="stylesheet">
+</head>
+<body>
+  <a class="visually-hidden-focusable" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===== COMPONENTE 1: NAVBAR CON COLLAPSE ===== -->
+  <header>
+    <nav class="navbar navbar-expand-md navbar-eje" data-bs-theme="dark" aria-label="Principal">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Rutas del Eje</a>
+
+        <!-- TODO G2.1 - Completa la navbar (documentación: getbootstrap.com/docs/5.3/components/navbar):
+             1. Un <button class="navbar-toggler" type="button"> con:
+                data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Abrir menú"
+                y adentro <span class="navbar-toggler-icon"></span>
+             2. Un <div class="collapse navbar-collapse" id="menu"> con una
+                <ul class="navbar-nav ms-auto"> y 3 enlaces: Inicio, Rutas (#rutas), Contacto (#contacto)
+             Prueba: achica la ventana a menos de 768 px y el menú debe esconderse tras el botón.
+             Consulta: https://getbootstrap.com/docs/5.3/components/navbar/#responsive-behaviors -->
+
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <section class="hero-eje py-5">
+      <div class="container py-md-4">
+        <h1 class="display-5 fw-bold">Descubre el Eje Cafetero</h1>
+        <p class="lead col-lg-7">Palmas de cera, fincas cafeteras, termales y pueblos de bahareque en Caldas, Risaralda y Quindío.</p>
+        <a class="btn btn-primary btn-lg" href="#rutas">Ver rutas</a>
+      </div>
+    </section>
+
+    <section id="rutas" class="container py-5" aria-labelledby="titulo-rutas">
+      <h2 id="titulo-rutas" class="mb-4">Rutas disponibles</h2>
+
+      <div class="row g-3 align-items-end mb-4">
+        <!-- ===== COMPONENTE 2: BTN-GROUP DE FILTROS ===== -->
+        <div class="col-lg-6">
+          <div class="btn-group flex-wrap" role="group" aria-label="Filtrar por tipo de ruta">
+            <!-- Ejemplo resuelto -->
+            <button type="button" class="btn btn-outline-primary active" data-tipo="todos" aria-pressed="true">Todas</button>
+
+            <!-- TODO G2.2 - Agrega 4 botones iguales al de arriba, SIN la clase active y con aria-pressed="false":
+                 data-tipo="naturaleza" (Naturaleza), "cultura" (Cultura), "cafe" (Café), "aventura" (Aventura)
+                 Ojo: el valor de data-tipo debe ser IGUAL al campo "tipo" de datos.js
+                 Consulta: https://getbootstrap.com/docs/5.3/components/button-group/
+                              https://developer.mozilla.org/es/docs/Web/Accessibility/ARIA/Attributes/aria-pressed -->
+
+          </div>
+        </div>
+
+        <div class="col-sm-7 col-lg-3">
+          <label for="buscador" class="form-label">Buscar por nombre o municipio</label>
+          <input type="search" id="buscador" class="form-control" placeholder="Ej: Salento">
+        </div>
+
+        <!-- RETO: aquí va el <select id="orden"> para ordenar (ver RETO.md) -->
+      </div>
+
+      <!-- TODO G4.4 - Agrega aria-live="polite" a este párrafo para que el lector
+           de pantalla anuncie "N rutas encontradas" cada vez que cambie. -->
+      <p id="resultado" class="text-body-secondary"></p>
+
+      <!-- ===== COMPONENTE 3: CARDS =====
+           Esta es la TARJETA MODELO escrita a mano. Úsala como plantilla para crearCard() en js/app.js:
+           copia el HTML dentro de un template literal y cambia los datos fijos por ${ruta.propiedad}.
+
+      <div class="col">
+        <article class="card h-100 ruta-card">
+          <img src="img/naturaleza.svg" class="card-img-top" alt="">
+          <div class="card-body">
+            <span class="badge badge-naturaleza">Naturaleza</span>
+            <h3 class="card-title h5 mt-2">Valle de Cocora</h3>
+            <p class="card-subtitle mb-2 text-body-secondary">Salento, Quindío</p>
+            <p class="card-text">Caminata entre palmas de cera, el árbol nacional, con cruce de puentes colgantes.</p>
+          </div>
+          <div class="card-footer d-flex justify-content-between align-items-center">
+            <span>5 h</span>
+            <strong class="precio">$ 25.000</strong>
+          </div>
+        </article>
+      </div>
+
+           alt="" porque la imagen es una ilustración decorativa: el nombre ya está en el <h3>. -->
+      <div id="lista-rutas" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4"></div>
+    </section>
+  </main>
+
+  <footer id="contacto" class="pie-eje text-white py-4">
+    <div class="container">
+      <p class="mb-1 fw-bold">Rutas del Eje</p>
+      <address class="mb-0">Pereira, Risaralda · <a class="link-light" href="mailto:hola@rutasdeleje.co">hola@rutasdeleje.co</a></address>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Primero los datos, luego la app que los usa -->
+  <script src="js/datos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

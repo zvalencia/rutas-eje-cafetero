@@ -1,0 +1,9 @@
+{
+  "name": "rutas-eje-cafetero",
+  "version": "1.0.0",
+  "description": "Catálogo de rutas turísticas del Eje Cafetero: datos a tarjetas con Bootstrap 5, filtros y eventos con JS",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

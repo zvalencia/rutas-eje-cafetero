@@ -1,0 +1,110 @@
+/*
+ * estilos.css - Guía de estilo de "Rutas del Eje"
+ * ------------------------------------------------------------
+ * Regla de oro: los colores y fuentes se escriben UNA sola vez,
+ * como variables en :root. El resto del CSS solo usa var(--...).
+ *
+ * Bootstrap 5.3 también funciona con variables (--bs-...).
+ * Para personalizarlo NO editamos bootstrap.min.css:
+ * sobrescribimos sus variables con las nuestras.
+ *
+ * Verifica tu avance con:  node --test
+ *
+ * Consulta:
+ *   MDN · Variables CSS ......... https://developer.mozilla.org/es/docs/Web/CSS/Using_CSS_custom_properties
+ *   Bootstrap · CSS variables ... https://getbootstrap.com/docs/5.3/customize/css-variables/
+ *   Bootstrap · Buttons ......... https://getbootstrap.com/docs/5.3/components/buttons/#variables
+ *   Contraste ................... https://webaim.org/resources/contrastchecker/
+ */
+
+/* ========== 1. TOKENS DE LA MARCA ========== */
+:root {
+  /* Ejemplo resuelto */
+  --eje-primario: #1f5f3a;   /* verde cafetal · botones y acentos  */
+  --eje-fondo: #faf6ee;      /* crema         · fondo de la página */
+  --eje-radio: 0.75rem;
+
+  /* TODO G1.1 - Define los tokens que faltan (colores en hex de 6 dígitos):
+   *   --eje-secundario  -> color oscuro para navbar y pie (texto blanco encima, contraste ≥ 4.5:1)
+   *   --eje-texto       -> color del texto general (sobre --eje-fondo, contraste ≥ 4.5:1)
+   *   --eje-fuente      -> pila de fuentes, ej: "Segoe UI", system-ui, sans-serif
+   * Comprueba el contraste en https://webaim.org/resources/contrastchecker/
+   */
+
+  /* Colores de categoría (badges), ya resueltos */
+  --eje-naturaleza: #2e6b30;
+  --eje-cultura: #6a3d8f;
+  --eje-cafe: #6f4e37;
+  --eje-aventura: #a33a17;
+
+  /* ========== 2. BOOTSTRAP USA NUESTROS TOKENS ========== */
+  /* Ejemplo resuelto */
+  --bs-body-bg: var(--eje-fondo);
+  --bs-border-radius: var(--eje-radio);
+
+  /* TODO G1.2 - Haz que Bootstrap use tu texto y tu fuente:
+   *   --bs-body-color       -> var(--eje-texto)
+   *   --bs-body-font-family -> var(--eje-fuente)
+   */
+}
+
+/* ========== 3. COMPONENTES ========== */
+
+/* Ejemplo resuelto: Botón principal (hero)
+ * Cada componente de Bootstrap tiene SUS PROPIAS variables (--bs-btn-...).
+ * Cambiar --bs-primary no basta: hay que sobrescribirlas en el componente. */
+.btn-primary {
+  --bs-btn-bg: var(--eje-primario);
+  --bs-btn-border-color: var(--eje-primario);
+  --bs-btn-hover-bg: var(--eje-secundario);
+  --bs-btn-hover-border-color: var(--eje-secundario);
+  --bs-btn-active-bg: var(--eje-secundario);
+}
+
+/* TODO G1.3 - Botones de filtro (btn-group).
+ * Asigna var(--eje-primario) a estas variables de .btn-outline-primary:
+ *   --bs-btn-color, --bs-btn-border-color, --bs-btn-hover-bg,
+ *   --bs-btn-hover-border-color, --bs-btn-active-bg, --bs-btn-active-border-color
+ * Experimenta: en DevTools selecciona un botón de filtro -> pestaña Computed -> busca --bs-btn-color.
+ */
+.btn-outline-primary {
+
+}
+
+/* Navbar y pie (se ven transparentes hasta que definas --eje-secundario) */
+.navbar-eje,
+.pie-eje {
+  background-color: var(--eje-secundario);
+}
+
+/* Hero */
+.hero-eje {
+  background: linear-gradient(135deg, var(--eje-secundario, #333), var(--eje-primario));
+  color: #ffffff;
+}
+
+/* Tarjetas */
+.ruta-card {
+  border: 0;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.ruta-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.12);
+}
+.ruta-card .precio {
+  color: var(--eje-primario);
+}
+
+/* Badges por categoría */
+.badge-naturaleza { background-color: var(--eje-naturaleza); }
+.badge-cultura    { background-color: var(--eje-cultura); }
+.badge-cafe       { background-color: var(--eje-cafe); }
+.badge-aventura   { background-color: var(--eje-aventura); }
+
+/* Foco visible para quien navega con teclado */
+:focus-visible {
+  outline: 3px solid #f2c94c;
+  outline-offset: 2px;
+}
