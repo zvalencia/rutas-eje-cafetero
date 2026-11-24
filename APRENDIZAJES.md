@@ -102,13 +102,18 @@
 
 ## Reto · Ordenar rutas
 
-**Consulté:** _enlace(s)_ → _qué encontré_
+**Consulté:**
+- MDN, Array.sort() (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) → `sort()` ordena el arreglo en el lugar (lo modifica) y devuelve esa misma referencia; la función de comparación devuelve negativo, cero o positivo.
+- MDN, String.localeCompare() (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare) → compara textos según el idioma (`'es'`), así que las tildes no rompen el orden alfabético.
+- MDN, Sintaxis spread (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Operators/Spread_syntax) → `[...lista]` crea una copia superficial del arreglo.
+- MDN, Evento change (https://developer.mozilla.org/es/docs/Web/API/HTMLElement/change_event) → en un `<select>` se dispara cuando la persona elige otra opción.
+- Node.js test runner (https://nodejs.org/api/test.html) y assert (https://nodejs.org/api/assert.html) → `test()`, `describe()`, `assert.equal`, `assert.deepEqual`.
 
 1. **Explica:** ¿por qué `ordenarRutas` hace `const copia = [...lista]` antes de `sort()`? ¿Qué le pasaría a `rutas` si no se copia? ¿Qué prueba tuya lo demuestra?
-   _Tu respuesta_
+   `sort()` modifica el arreglo sobre el que se llama. Si ordenara `lista` directamente y `lista` fuera `rutas`, el arreglo de datos original quedaría reordenado para siempre y la opción "Sin orden" ya no mostraría el orden original. Con `const copia = [...lista]` se ordena solo la copia. Lo demuestra la prueba "no modifica la lista original ni devuelve la misma referencia": compara los ids antes y después, y verifica que el resultado no es la misma referencia.
 
 2. **Explica:** en `copia.sort((a, b) => a.precio - b.precio)`, ¿qué significa que la función devuelva un número negativo, cero o positivo?
-   _Tu respuesta_
+   La función de comparación recibe dos elementos `a` y `b`. Si devuelve un número negativo, `a` va antes que `b`; si devuelve positivo, `a` va después; si devuelve 0, se consideran iguales y conservan su orden. En `a.precio - b.precio`, si `a` es más barata el resultado es negativo y queda primero, por eso el orden es de menor a mayor y las gratis (0) quedan al comienzo.
 
 3. **Tus pruebas:** elige una de tus pruebas y explica qué error de programación detectaría si alguien dañara la función.
-   _Tu respuesta_
+   La prueba "precio: de menor a mayor y las rutas gratis van primero" detectaría que alguien invirtiera la resta (`b.precio - a.precio`) o comparara precios como texto: las posiciones 0 y 1 dejarían de ser 0 y el último ya no sería 150000, y el recorrido que verifica `precios[i-1] <= precios[i]` fallaría. La prueba del criterio desconocido detectaría que `sort()` se aplique siempre y la de lista vacía que la función falle con `[]`.
