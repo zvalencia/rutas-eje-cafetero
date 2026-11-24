@@ -82,16 +82,21 @@
 
 ## Issue #4 · G4 Filtros y eventos
 
-**Consulté:** _enlace(s)_ → _qué encontré_
+**Consulté:**
+- MDN, Array.filter() (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) → devuelve un arreglo nuevo con los elementos que cumplen la condición y no modifica el original.
+- MDN, Funciones flecha (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Functions/Arrow_functions) → con llaves `{ }` se necesita `return`; sin llaves el valor de la expresión se devuelve solo.
+- MDN, String.includes() (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/includes) → devuelve `true` si un texto contiene a otro; distingue mayúsculas, por eso normalizo antes.
+- MDN, addEventListener (https://developer.mozilla.org/es/docs/Web/API/EventTarget/addEventListener), evento input (https://developer.mozilla.org/es/docs/Web/API/Element/input_event) y dataset (https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset) → registrar funciones para eventos, cuándo se dispara `input` y cómo leer `data-tipo` como `dataset.tipo`.
+- MDN, aria-live (https://developer.mozilla.org/es/docs/Web/Accessibility/ARIA/Attributes/aria-live) → `polite` anuncia el cambio cuando el lector termina lo que estaba diciendo.
 
 1. **Predice y comprueba:** después de ejecutar `filtrarPorTipo(rutas, 'cafe')` en la consola, ¿cuánto vale `rutas.length`? ¿Por qué?
-   _Tu respuesta_
+   `rutas.length` sigue valiendo 11. `filter()` no modifica el arreglo sobre el que se llama: devuelve uno nuevo con las rutas que cumplen la condición (2 de café). Por eso `filtrarPorTipo` puede filtrar tantas veces como quiera y `rutas` siempre conserva los datos completos. (Lo comprobé ejecutando `filtrarPorTipo(rutas, 'cafe')`: devolvió 2 y luego `rutas.length` dio 11.)
 
 2. **Explica el recorrido:** describe paso a paso qué pasa desde que la persona hace clic en el botón "Cultura" hasta que aparecen las tarjetas nuevas. Menciona: el evento, `estado`, `aplicarFiltros()`, `filtrarPorTipo()` y `pintarRutas()`.
-   _Tu respuesta_
+   1) La persona hace clic en "Cultura" y se dispara el evento `click` del botón. 2) El listener lee `boton.dataset.tipo` (`'cultura'`) y lo guarda en `estado.tipo`; también pone `active` y `aria-pressed="true"` solo en ese botón. 3) Llama a `aplicarFiltros()`, que parte de `rutas`, aplica `filtrarPorTipo(rutas, estado.tipo)` y luego `buscarPorTexto(..., estado.texto)`. 4) El resultado se pasa a `pintarRutas()`, que reemplaza el `innerHTML` de `#lista-rutas` con las tarjetas nuevas y actualiza el texto de `#resultado`, que el lector anuncia por `aria-live`. El evento nunca toca las tarjetas: solo cambia el estado, y todo se vuelve a pintar desde los datos, por eso filtro y buscador se combinan.
 
 3. **¿Qué pasaría si…** usas el evento `'change'` en lugar de `'input'` en el buscador? Pruébalo y describe la diferencia.
-   _Tu respuesta_
+   `input` se dispara cada vez que cambia el valor del campo, o sea con cada letra escrita, así que la lista se actualiza mientras se escribe. `change` en un campo de texto solo se dispara cuando el campo pierde el foco o se pulsa Enter tras modificarlo, así que la lista se actualizaría tarde. (Es lo que indica la documentación de MDN; no hice la prueba visual con `change`. Sí verifiqué con una simulación en jsdom que con `input` el filtro y el buscador se combinan y que sin resultados aparece el mensaje "No encontramos rutas…".)
 
 ---
 
