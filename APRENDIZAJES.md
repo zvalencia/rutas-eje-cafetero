@@ -50,7 +50,11 @@
 
 ## Issue #3 · G3 Datos → tarjetas
 
-**Consulté:** _enlace(s)_ → _qué encontré_
+**Consulté:**
+- MDN, Template literals (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals) → las comillas invertidas permiten varias líneas e insertar expresiones con `${ }`.
+- MDN, Array.map() (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map) → Valor devuelto: un arreglo nuevo con el mismo tamaño que el original.
+- MDN, Array.join() (https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/join) → si no se da separador, usa la coma.
+- MDN, Element.innerHTML (https://developer.mozilla.org/es/docs/Web/API/Element/innerHTML) → al asignarlo reemplaza todo el contenido anterior del elemento.
 
 1. **Predice y comprueba:** antes de ejecutarlas en la consola del navegador, escribe qué crees que devuelve cada línea. Después ejecútalas y anota el resultado real.
    ```js
@@ -61,16 +65,18 @@
    ```
    | Línea | Mi predicción | Resultado real |
    |---|---|---|
-   | 1 | | |
-   | 2 | | |
-   | 3 | | |
-   | 4 | | |
+   | 1 | `[10, 20, 30]` | `[10, 20, 30]` |
+   | 2 | `'abc'` | `'abc'` |
+   | 3 | `'a - b - c'` | `'a - b - c'` |
+   | 4 | `11` | `11` |
+
+   Las predicciones las escribí antes de ejecutar y luego las comprobé con Node.js (mismo motor de JavaScript que la consola del navegador); coincidieron. `map()` devuelve un arreglo nuevo del mismo tamaño que el original (11 nombres). También comprobé que `crearCard(rutas[0])` devuelve un texto con el HTML de la tarjeta de "Valle de Cocora".
 
 2. **Experimenta y explica:** quita temporalmente `.join('')` de `pintarRutas`. ¿Qué aparece entre las tarjetas y por qué? (Pista: ¿qué hace `innerHTML` cuando le asignas un arreglo?). Vuelve a ponerlo.
-   _Tu respuesta_
+   Sin `join('')`, `innerHTML` recibe un arreglo y lo convierte a texto con `toString()`, que une los elementos con comas. Entre tarjeta y tarjeta aparecería una coma visible en la página. `join('')` une todas las tarjetas en un único texto sin separador. (Comprobé en Node que `['<div>', '<div>'].toString()` da `<div>,<div>`; no hice el experimento visual en el navegador.)
 
 3. **Explica:** ¿por qué la tarjeta se escribe con comillas invertidas `` ` `` y no con comillas simples `' '`? ¿Qué hace `${ }`?
-   _Tu respuesta_
+   Las comillas simples solo producen texto literal en una línea: no insertan valores ni permiten saltos de línea sin trucos. Las comillas invertidas crean un template literal: aceptan varias líneas (ideal para HTML) y `${ }` evalúa la expresión de adentro y pone su resultado en el texto, por ejemplo `${ruta.nombre}` o `${formatearPrecio(ruta.precio)}`.
 
 ---
 

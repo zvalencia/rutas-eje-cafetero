@@ -68,7 +68,22 @@ function normalizar(texto) {
  *      y el precio con ${formatearPrecio(ruta.precio)}
  * ============================================================ */
 function crearCard(ruta) {
-  // TODO: implementar
+  return `
+    <div class="col">
+      <article class="card h-100 ruta-card">
+        <img src="${ruta.imagen}" class="card-img-top" alt="">
+        <div class="card-body">
+          <span class="badge badge-${ruta.tipo}">${ETIQUETAS_TIPO[ruta.tipo]}</span>
+          <h3 class="card-title h5 mt-2">${ruta.nombre}</h3>
+          <p class="card-subtitle mb-2 text-body-secondary">${ruta.municipio}, ${ruta.departamento}</p>
+          <p class="card-text">${ruta.descripcion}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <span>${ruta.duracionHoras} h</span>
+          <strong class="precio">${formatearPrecio(ruta.precio)}</strong>
+        </div>
+      </article>
+    </div>`;
 }
 
 /* ============================================================
@@ -95,7 +110,12 @@ function crearCard(ruta) {
  *        mensaje.textContent = `${lista.length} rutas encontradas`
  * ============================================================ */
 function pintarRutas(lista, contenedor, mensaje) {
-  // TODO: implementar
+  contenedor.innerHTML = lista.map(crearCard).join('');
+  if (lista.length === 0) {
+    mensaje.textContent = 'No encontramos rutas con ese filtro. Prueba con otra búsqueda.';
+  } else {
+    mensaje.textContent = `${lista.length} rutas encontradas`;
+  }
 }
 
 /* ============================================================
