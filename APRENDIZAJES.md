@@ -31,16 +31,20 @@
 
 ## Issue #2 · G2 Componentes
 
-**Consulté:** _enlace(s)_ → _qué encontré_
+**Consulté:**
+- Bootstrap, Navbar, Responsive behaviors (https://getbootstrap.com/docs/5.3/components/navbar/#responsive-behaviors) → la estructura `navbar-toggler` + `collapse navbar-collapse` y los atributos `data-bs-*`.
+- Bootstrap, Button group (https://getbootstrap.com/docs/5.3/components/button-group/) → el grupo lleva `role="group"` y `aria-label` para que el lector de pantalla lo anuncie como conjunto.
+- MDN, aria-pressed (https://developer.mozilla.org/es/docs/Web/Accessibility/ARIA/Attributes/aria-pressed) → define un botón de alternar; valores `true`/`false`.
+- MDN, atributos data-* (https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/data-*) → permiten guardar datos propios en el HTML, legibles desde JS con `dataset`.
 
 1. **Explica:** ¿qué relación hay entre `data-bs-target="#menu"` en el botón y el `id="menu"` del div? ¿Quién lee ese atributo?
-   _Tu respuesta_
+   `data-bs-target="#menu"` es un selector CSS que apunta al elemento con `id="menu"`; si el id no coincide, el botón no sabe qué abrir. Lo lee el JavaScript de Bootstrap (`bootstrap.bundle.min.js`), que al hacer clic en un elemento con `data-bs-toggle="collapse"` busca el destino con ese selector y lo muestra u oculta.
 
 2. **Experimenta:** abre y cierra el menú en un ancho de celular y observa en DevTools el atributo `aria-expanded` del botón. ¿Qué pasa con su valor? ¿Para quién es útil esa información?
-   _Tu respuesta_
+   Según la documentación, el JavaScript de Bootstrap alterna `aria-expanded` entre `false` (menú cerrado) y `true` (abierto) en cada clic. Esa información es para las tecnologías de apoyo: el lector de pantalla anuncia al usuario si el menú está desplegado o plegado, algo que una persona sin visión no puede ver. Si cambio `data-bs-target` a `#otro`, no existe un elemento con ese id y el botón dejaría de abrir el menú. (Basado en la documentación; no hice la prueba en DevTools.)
 
 3. **¿Qué pasaría si…** en un botón de filtro escribes `data-tipo="café"` (con tilde)? Piensa en lo que hay en `datos.js` antes de responder.
-   _Tu respuesta_
+   En `datos.js` el campo `tipo` vale `'cafe'` sin tilde, y el filtro compara con `===`. Con `data-tipo="café"` la comparación `ruta.tipo === 'café'` sería falsa para todas las rutas, y el botón mostraría 0 resultados. Por eso el `data-tipo` debe ser idéntico al dato; la tilde solo va en el texto visible del botón.
 
 ---
 

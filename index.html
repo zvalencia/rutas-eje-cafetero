@@ -17,15 +17,18 @@
       <div class="container">
         <a class="navbar-brand fw-bold" href="#">Rutas del Eje</a>
 
-        <!-- TODO G2.1 - Completa la navbar (documentación: getbootstrap.com/docs/5.3/components/navbar):
-             1. Un <button class="navbar-toggler" type="button"> con:
-                data-bs-toggle="collapse" data-bs-target="#menu"
-                aria-controls="menu" aria-expanded="false" aria-label="Abrir menú"
-                y adentro <span class="navbar-toggler-icon"></span>
-             2. Un <div class="collapse navbar-collapse" id="menu"> con una
-                <ul class="navbar-nav ms-auto"> y 3 enlaces: Inicio, Rutas (#rutas), Contacto (#contacto)
-             Prueba: achica la ventana a menos de 768 px y el menú debe esconderse tras el botón.
-             Consulta: https://getbootstrap.com/docs/5.3/components/navbar/#responsive-behaviors -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="#rutas">Rutas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
 
       </div>
     </nav>
@@ -50,11 +53,10 @@
             <!-- Ejemplo resuelto -->
             <button type="button" class="btn btn-outline-primary active" data-tipo="todos" aria-pressed="true">Todas</button>
 
-            <!-- TODO G2.2 - Agrega 4 botones iguales al de arriba, SIN la clase active y con aria-pressed="false":
-                 data-tipo="naturaleza" (Naturaleza), "cultura" (Cultura), "cafe" (Café), "aventura" (Aventura)
-                 Ojo: el valor de data-tipo debe ser IGUAL al campo "tipo" de datos.js
-                 Consulta: https://getbootstrap.com/docs/5.3/components/button-group/
-                              https://developer.mozilla.org/es/docs/Web/Accessibility/ARIA/Attributes/aria-pressed -->
+            <button type="button" class="btn btn-outline-primary" data-tipo="naturaleza" aria-pressed="false">Naturaleza</button>
+            <button type="button" class="btn btn-outline-primary" data-tipo="cultura" aria-pressed="false">Cultura</button>
+            <button type="button" class="btn btn-outline-primary" data-tipo="cafe" aria-pressed="false">Café</button>
+            <button type="button" class="btn btn-outline-primary" data-tipo="aventura" aria-pressed="false">Aventura</button>
 
           </div>
         </div>
