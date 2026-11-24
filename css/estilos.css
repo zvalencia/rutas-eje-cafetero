@@ -24,12 +24,9 @@
   --eje-fondo: #faf6ee;      /* crema         · fondo de la página */
   --eje-radio: 0.75rem;
 
-  /* TODO G1.1 - Define los tokens que faltan (colores en hex de 6 dígitos):
-   *   --eje-secundario  -> color oscuro para navbar y pie (texto blanco encima, contraste ≥ 4.5:1)
-   *   --eje-texto       -> color del texto general (sobre --eje-fondo, contraste ≥ 4.5:1)
-   *   --eje-fuente      -> pila de fuentes, ej: "Segoe UI", system-ui, sans-serif
-   * Comprueba el contraste en https://webaim.org/resources/contrastchecker/
-   */
+  --eje-secundario: #3b2a1e; /* café oscuro · navbar y pie (blanco encima: 13.67:1) */
+  --eje-texto: #2b2118;      /* café casi negro · texto general (sobre fondo: 14.61:1) */
+  --eje-fuente: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
 
   /* Colores de categoría (badges), ya resueltos */
   --eje-naturaleza: #2e6b30;
@@ -42,10 +39,8 @@
   --bs-body-bg: var(--eje-fondo);
   --bs-border-radius: var(--eje-radio);
 
-  /* TODO G1.2 - Haz que Bootstrap use tu texto y tu fuente:
-   *   --bs-body-color       -> var(--eje-texto)
-   *   --bs-body-font-family -> var(--eje-fuente)
-   */
+  --bs-body-color: var(--eje-texto);
+  --bs-body-font-family: var(--eje-fuente);
 }
 
 /* ========== 3. COMPONENTES ========== */
@@ -61,14 +56,14 @@
   --bs-btn-active-bg: var(--eje-secundario);
 }
 
-/* TODO G1.3 - Botones de filtro (btn-group).
- * Asigna var(--eje-primario) a estas variables de .btn-outline-primary:
- *   --bs-btn-color, --bs-btn-border-color, --bs-btn-hover-bg,
- *   --bs-btn-hover-border-color, --bs-btn-active-bg, --bs-btn-active-border-color
- * Experimenta: en DevTools selecciona un botón de filtro -> pestaña Computed -> busca --bs-btn-color.
- */
+/* Botones de filtro (btn-group): variables --bs-btn-* de .btn-outline-primary */
 .btn-outline-primary {
-
+  --bs-btn-color: var(--eje-primario);
+  --bs-btn-border-color: var(--eje-primario);
+  --bs-btn-hover-bg: var(--eje-primario);
+  --bs-btn-hover-border-color: var(--eje-primario);
+  --bs-btn-active-bg: var(--eje-primario);
+  --bs-btn-active-border-color: var(--eje-primario);
 }
 
 /* Navbar y pie (se ven transparentes hasta que definas --eje-secundario) */

@@ -6,22 +6,26 @@
 >
 > Este archivo forma parte de la calificación del reto (criterio *Comprensión*).
 
-**Aprendiz:** _tu nombre_
+**Aprendiz:** Yeison Valencia Zapata
 
 ---
 
 ## Issue #1 · G1 Guía de estilo
 
-**Consulté:** _enlace(s)_ → _qué encontré_
+**Consulté:**
+- MDN, variables CSS (https://developer.mozilla.org/es/docs/Web/CSS/Using_CSS_custom_properties) → se declaran con `--nombre` en `:root` y se leen con `var(--nombre)`.
+- Bootstrap, CSS variables (https://getbootstrap.com/docs/5.3/customize/css-variables/) → las variables globales `--bs-body-color`, `--bs-body-font-family`, etc.
+- Bootstrap, Buttons (https://getbootstrap.com/docs/5.3/components/buttons/#variables) → cada botón lee sus propias `--bs-btn-*`.
+- WebAIM Contrast Checker (https://webaim.org/resources/contrastchecker/) → el mínimo AA para texto normal es 4.5:1; mis colores dan 7.62:1 (primario), 13.67:1 (secundario) y 14.61:1 (texto sobre fondo).
 
 1. **Explica:** ¿qué ventaja tiene escribir los colores como variables en `:root` en vez de escribir el hex directamente en cada regla?
-   _Tu respuesta_
+   La ventaja es que cada color se escribe una sola vez y todo el sitio lo reutiliza con `var(--...)`. Si quiero cambiar el verde de la marca, edito una línea en `:root` y cambian botones, precios y degradado a la vez, en vez de buscar el hex en cada regla y arriesgarme a olvidar alguna. También evita colores "sueltos" que se vean distintos entre sí.
 
 2. **Experimenta y explica:** en DevTools selecciona el botón "Ver rutas", pestaña *Computed* (o *Calculado*) y busca `--bs-btn-bg`. ¿De dónde sale su valor? ¿Por qué cambiar `--bs-primary` no habría cambiado el color del botón?
-   _Tu respuesta_
+   El valor de `--bs-btn-bg` lo define la regla `.btn-primary` de Bootstrap y, como mi `estilos.css` se carga después, mi regla `.btn-primary` lo sobrescribe con `var(--eje-primario)`. `--bs-primary` no bastaría porque el botón no lee esa variable: lee `--bs-btn-bg`, `--bs-btn-border-color`, etc., que Bootstrap define dentro del propio componente. Hay que sobrescribir las variables del componente. (Esta explicación sale de la documentación de Bootstrap; no la verifiqué mirando DevTools.)
 
 3. **¿Qué pasaría si…** enlazas `estilos.css` ANTES de `bootstrap.min.css` en el `<head>`? Pruébalo, describe lo que ves y vuelve a dejarlo como estaba.
-   _Tu respuesta_
+   Según la cascada de CSS, si dos reglas tienen la misma especificidad gana la que aparece después. Si `estilos.css` va antes de Bootstrap, las reglas `.btn-primary` y `.btn-outline-primary` de Bootstrap vuelven a ganar y mis valores se pierden: los botones recuperarían el azul por defecto. Por eso mi CSS se enlaza después de Bootstrap y así lo dejé. (Descripción basada en la cascada; no hice la prueba visual en el navegador.)
 
 ---
 
